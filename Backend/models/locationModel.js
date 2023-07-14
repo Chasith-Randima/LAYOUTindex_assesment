@@ -20,6 +20,10 @@ const locationSchema = new mongoose.Schema({
       ref: "Device",
     },
   ],
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
 });
 
 const Location = mongoose.model("Location", locationSchema);

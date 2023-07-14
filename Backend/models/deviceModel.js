@@ -10,14 +10,15 @@ const deviceSchema = new mongoose.Schema({
     enum: ["pos", "kisok", "signage"],
     required: [true, "Please sadd a type"],
   },
-  image: {
-    type: String,
-    required: [true, "Please select a image"],
-  },
+  images: [String],
   status: {
     type: String,
     enum: ["active", "inactive"],
     default: "active",
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
   },
 });
 
