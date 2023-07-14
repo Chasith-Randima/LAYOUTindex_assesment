@@ -18,7 +18,12 @@ router
 router
   .route("/:id")
   .get(deviceController.getOneDevice)
-  .patch(deviceController.updateOneDevice)
+  .patch(
+    authController.protect,
+    deviceController.uploadDeviceImages,
+    deviceController.resizeDeviceImages,
+    deviceController.updateOneDevice
+  )
   .delete(deviceController.deleteOneDevice);
 
 module.exports = router;
