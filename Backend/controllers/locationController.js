@@ -16,8 +16,8 @@ exports.getAllLocations = catchAsync(async (req, res, next) => {
   let count = new APIFeatures(Location.find(filter), req.query)
     .filter()
     .sort()
-    .limitFields()
-    .paginate();
+    .limitFields();
+  // .paginate();
   let totalCount = await count.query.countDocuments();
 
   res.status(200).json({
