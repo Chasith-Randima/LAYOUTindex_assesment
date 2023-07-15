@@ -14,16 +14,22 @@ const locationSchema = new mongoose.Schema({
     required: [true, "Please enter a phone number"],
   },
 
-  devices: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: "Device",
-    },
-  ],
+  // devices: [
+  //   {
+  //     type: mongoose.Schema.ObjectId,
+  //     ref: "Device",
+  //   },
+  // ],
   createdAt: {
     type: Date,
     default: Date.now(),
   },
+});
+
+locationSchema.virtual("devices", {
+  ref: "Device",
+  foreignField: "location",
+  localField: "_id",
 });
 
 const Location = mongoose.model("Location", locationSchema);

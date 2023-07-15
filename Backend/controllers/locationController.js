@@ -30,7 +30,9 @@ exports.getAllLocations = catchAsync(async (req, res, next) => {
 });
 
 exports.getOneLocation = catchAsync(async (req, res, next) => {
-  let location = await Location.findById(req.params.id);
+  let location = await Location.findById(req.params.id).populate("devices");
+  // console.log(location);
+  // console.log(location.devices);
 
   if (!location) {
     return next(new AppError("No location found with that ID", 404));
@@ -40,6 +42,7 @@ exports.getOneLocation = catchAsync(async (req, res, next) => {
     status: "success",
     message: "found the document...",
     location,
+    devices: location.devices,
   });
 });
 
@@ -86,4 +89,30 @@ exports.deleteOneLocation = catchAsync(async (req, res, next) => {
     status: "success",
     message: "location deleted sucessfully..",
   });
+});
+
+exports.hospitalNameId = catchAsync(async (req, res, next) => {
+  const doc = await Hospital.find({}).select({ name: 1, _id: 1 });
+
+  if (doc) {
+    res.status(200).json({
+      status: "success",
+      message: `${doc.length} documents found...`,
+      results: doc.length,
+      doc,
+    });
+  }
+});
+
+exports.locationNameId = catchAsync(async (req, res, next) => {
+  const doc = await Location.find({}).select({ locationName: 1, _id: 1 });
+
+  if (doc) {
+    res.status(200).json({
+      status: "success",
+      message: `${doc.length} documents found...`,
+      results: doc.length,
+      doc,
+    });
+  }
 });

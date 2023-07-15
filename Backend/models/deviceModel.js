@@ -16,6 +16,13 @@ const deviceSchema = new mongoose.Schema({
     enum: ["active", "inactive"],
     default: "active",
   },
+  location: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "Location",
+      // required: [true, "Device must belong to a Location"],
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now(),
