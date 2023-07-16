@@ -65,7 +65,7 @@ const Navbar = ({ setSideBar, showSideBar }) => {
           )}
           {!user._id && (
             <div className="cursor-pointer hidden md:block mx-3 p-3 text-primary-500 font-semibold rounded bg-white hover:bg-primary-500 hover:text-white transition-all">
-              <Link href="/auth/LogIn">LogIn</Link>
+              <Link href="/">LogIn</Link>
             </div>
           )}
           <div className="md:hidden" onClick={() => setSideBar(!showSideBar)}>
