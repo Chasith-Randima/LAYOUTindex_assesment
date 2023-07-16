@@ -1,8 +1,10 @@
 INSTALLATION INSTRUCTIONS
 
 First you should download the source files from google drive or clone the project from the github or download attached source code.
-google drive link -
-github link - 
+
+github link - https://github.com/Chasith-Randima/LAYOUTindex_assesment
+google drive link - https://drive.google.com/drive/folders/13wCu2uWHjjPUK2gUugKtoyROzGGJagdk?usp=sharing
+
 
 in order to app to work you need backend and frontend both running at the same time.first setup the backend.
 
