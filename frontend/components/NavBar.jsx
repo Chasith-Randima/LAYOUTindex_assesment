@@ -50,7 +50,7 @@ const Navbar = ({ setSideBar, showSideBar }) => {
         <div className="flex justify-end my-auto ">
           {user._id && (
             <>
-              <div className="cursor-pointer hidden md:block mx-3 p-3 text-primary-500 font-semibold rounded bg-white hover:bg-primary-500 hover:text-white transition-all">
+              <div className="cursor-pointer hidden md:block mx-3 p-3 text-primary-500 font-semibold rounded bg-white hover:bg-primary-500 hover:text-white transition-all capitalize">
                 {user.name.split(" ")[0]}{" "}
               </div>
               <div className=" hidden md:block mx-3 p-3 text-primary-500 font-semibold rounded bg-white hover:bg-primary-500 hover:text-white transition-all">
