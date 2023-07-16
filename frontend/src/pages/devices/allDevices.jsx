@@ -1,30 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Layout from "components/Layout";
-
 import { getCookie } from "actions/auth";
-
 import { allDevices } from "actions/device";
-
 import Message from "components/Message";
-import Location from "components/location/Location";
 import Device from "components/device/Device";
 
 const AllDevices = () => {
-  // const Index = ({ data, token, cookie }) => {
-  //   console.log(token, cookie);
   const [allData, setAllData] = useState();
   const [show, setShow] = useState(false);
-  const [limit, setLimit] = useState(9);
+  const [limit, setLimit] = useState(6);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState();
-  //   const [totalPages, setTotalPages] = useState(
-  //     Math.ceil(allData.totalCount / limit)
-  //   );
+
   console.log(getCookie("token_user"));
-  const [name, setName] = useState();
-  const [dateOfBirth, setDateOfBirth] = useState();
-  //   const [appointmentDate2, setAppointmentDate2] = useState();
-  const [hospitalName, setHospitalName] = useState();
 
   const [alert, setAlert] = useState({
     message: "",
@@ -40,23 +28,10 @@ const AllDevices = () => {
     setAllData(data);
   };
 
-  // const [filters, setFilters] = useState({
-  //   name: undefined,
-  //   dateOfBirth: undefined,
-  //   appointmentDate2: undefined,
-  //   hospitalName: undefined,
-  // });
-
-  // const { name, dateOfBirth, appointmentDate2, hospitalName } = filters;
-
   const handleChange = (name) => (e) => {
     e.preventDefault();
     setFilters({ ...filters, [name]: e.target.value });
   };
-
-  // useEffect(() => {
-  //   initialSet();
-  // }, [data]);
 
   // ---------------pagination--------------------------
   const nextPage = () => {
@@ -98,25 +73,15 @@ const AllDevices = () => {
         limit,
         page,
         user: JSON.parse(localStorage.getItem("user"))._id,
-        //   name,
-        //   dateOfBirth,
-        //   appointmentDate2,
-        //   hospitalName,
       };
     } else {
       params = {
         limit,
         page,
-
-        //   name,
-        //   dateOfBirth,
-        //   appointmentDate2,
-        //   hospitalName,
       };
     }
     let token = getCookie("token_user");
 
-    // console.log(params, "submit clicked...");
     await allDevices(params)
       .then((data) => {
         console.log(data);
@@ -152,8 +117,6 @@ const AllDevices = () => {
             resetAlert();
           }, 1000);
         }
-
-        // return { data };
       })
       .catch((err) => {
         console.log(err);
@@ -166,15 +129,6 @@ const AllDevices = () => {
           success: false,
         });
       });
-    // await allAppointments(params)
-    //   .then((data) => {
-    //     console.log(data);
-    //     setAllData(data);
-    //     console.log(allData);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
   };
 
   return (
@@ -182,23 +136,14 @@ const AllDevices = () => {
       <Layout>
         <div className="flex justify-center">
           {alert.error && (
-            <Message
-              message={alert.message}
-              // alert={"error"}
-              resetAlert={resetAlert}
-            />
+            <Message message={alert.message} resetAlert={resetAlert} />
           )}
           {alert.success && (
-            <Message
-              message={alert.message}
-              // alert={"success"}
-              resetAlert={resetAlert}
-            />
+            <Message message={alert.message} resetAlert={resetAlert} />
           )}
           {alert.loading && (
             <Message
               message={"Loading...Please Waite..."}
-              // alert={"loading"}
               resetAlert={resetAlert}
             />
           )}
@@ -211,8 +156,6 @@ const AllDevices = () => {
           <div className="grid   grid-cols-10 md:grid-cols-6 bg-primary-400 p-4 rounded-xl text-white text-xl font-sb ">
             <h2 className="hidden md:block">Image</h2>
             <h2>Serial Number</h2>
-            {/* <h2 className="hidden md:block">Email</h2>
-            <h2>Role</h2> */}
             <h2>Status</h2>
             <h2>Type</h2>
             <h2 className="text-center col-span-2 md:col-span-1 mr-2 md:mr-0">
@@ -226,9 +169,7 @@ const AllDevices = () => {
             {console.log(allData)}
             {allData &&
               allData.devices.map((device) => {
-                // return <Location location={location} />;
                 return <Device device={device} all={true} />;
-                // <Patients patient={patient} />
               })}
           </div>
         </div>

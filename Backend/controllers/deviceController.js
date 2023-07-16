@@ -82,8 +82,8 @@ exports.getAllDevices = catchAsync(async (req, res, next) => {
   let count = new APIFeatures(Device.find(filter), req.query)
     .filter()
     .sort()
-    .limitFields()
-    .paginate();
+    .limitFields();
+
   let totalCount = await count.query.countDocuments();
 
   res.status(200).json({

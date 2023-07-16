@@ -43,9 +43,6 @@ const SingleDevice = () => {
             }, 1000);
           } else {
             setAllData(data);
-
-            // setTotalPages(Math.ceil(totalCount / limit));
-            // setShow(false);
           }
           setAlert({
             ...alert,

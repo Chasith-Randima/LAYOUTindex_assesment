@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Layout from "components/Layout";
-
 import { getCookie } from "actions/auth";
 import { updateDevice, oneDevice } from "actions/device";
 import { locationNameId } from "actions/location";
@@ -37,12 +36,6 @@ const UpdateDevice = () => {
     getNames();
     getDevice();
   }, [router]);
-
-  // useEffect(() => {
-  //   if (getCookie("token_user")) {
-  //     Router.push(`/`);
-  //   }
-  // }, []);
 
   const getNames = async () => {
     await locationNameId()
@@ -231,9 +224,6 @@ const UpdateDevice = () => {
       });
   };
 
-  //   const handleChange = (name) => (e) => {
-  //     setValues({ ...values, error: false, [name]: e.target.value });
-  //   };
   const handleChange = (name) => (e) => {
     e.preventDefault();
     let value = name == "images" ? e.target.files[0] : e.target.value;
@@ -299,7 +289,6 @@ const UpdateDevice = () => {
               type="text"
               value={type}
               onChange={handleChange("type")}
-              //   class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
               className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg outline-none text-gray-600"
               placeholder="Select Type"
             >
@@ -313,13 +302,6 @@ const UpdateDevice = () => {
                 <h2 className="text-red-500 ">Please add a Type</h2>
               </div>
             )}
-            {/* <input
-              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
-              type="text"
-              placeholder="Enter type"
-              value={type}
-              onChange={handleChange("type")}
-            /> */}
           </div>
           <div className="grid grid-cols-3 mt-1 mb-1">
             <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl text-gray-600">
@@ -329,7 +311,6 @@ const UpdateDevice = () => {
               type="text"
               value={status}
               onChange={handleChange("status")}
-              //   class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
               className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg outline-none text-gray-600"
               placeholder="Select Status"
             >
@@ -342,13 +323,6 @@ const UpdateDevice = () => {
                 <h2 className="text-red-500 ">Please select Status</h2>
               </div>
             )}
-            {/* <input
-              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
-              type="text"
-              placeholder="Enter status"
-              value={status}
-              onChange={handleChange("status")}
-            /> */}
           </div>
           <div className="grid grid-cols-3 mt-1 mb-1">
             <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl text-gray-600">
@@ -358,7 +332,6 @@ const UpdateDevice = () => {
               type="text"
               value={location}
               onChange={handleChange("location")}
-              //   class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
               className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg outline-none text-gray-600"
               placeholder="Select a Location"
             >
@@ -381,13 +354,6 @@ const UpdateDevice = () => {
                 <h2 className="text-red-500 ">Please select a Location</h2>
               </div>
             )}
-            {/* <input
-              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
-              type="text"
-              placeholder="Select Location"
-              value={location}
-              onChange={handleChange("location")}
-            /> */}
           </div>
           <div className="grid grid-cols-3 mt-1 mb-1">
             <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl text-gray-600">
@@ -397,7 +363,6 @@ const UpdateDevice = () => {
               className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg outline-none text-gray-600"
               type="file"
               placeholder="SelectImage"
-              //   value={images}
               onChange={handleChange("images")}
             />
             {error && !images && (

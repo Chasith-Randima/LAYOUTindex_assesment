@@ -24,18 +24,11 @@ const CreateLocation = () => {
     setAlert({ message: "", error: false, loading: false, success: false });
   };
 
-  // useEffect(() => {
-  //   if (getCookie("token_user")) {
-  //     Router.push(`/`);
-  //   }
-  // }, []);
-
   const { locationName, address, phone } = values;
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // console.log(values);
     if (!values.locationName || values.locationName.length <= 0) {
       setError(true);
       return;
@@ -108,23 +101,14 @@ const CreateLocation = () => {
   return (
     <Layout>
       {alert.error && (
-        <Message
-          message={alert.message}
-          // alert={"error"}
-          resetAlert={resetAlert}
-        />
+        <Message message={alert.message} resetAlert={resetAlert} />
       )}
       {alert.success && (
-        <Message
-          message={alert.message}
-          // alert={"success"}
-          resetAlert={resetAlert}
-        />
+        <Message message={alert.message} resetAlert={resetAlert} />
       )}
       {alert.loading && (
         <Message
           message={"Loading...Please Waite..."}
-          // alert={"loading"}
           resetAlert={resetAlert}
         />
       )}
@@ -178,7 +162,7 @@ const CreateLocation = () => {
               value={phone}
               onChange={handleChange("phone")}
             />
-            {error && phone?.length < 8 && (
+            {error && phone?.length <= 9 && (
               <div className="flex justify-center col-span-3 border-red-500 border-2 rounded-lg mt-1 mb-1">
                 <h2 className="text-red-500 ">
                   Please add a Valid Phone number

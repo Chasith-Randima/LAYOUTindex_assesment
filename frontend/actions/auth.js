@@ -1,6 +1,5 @@
 import fetch from "isomorphic-fetch";
 import cookie from "js-cookie";
-// import Router from "next/router";
 
 let API = process.env.NEXT_PUBLIC_API_DEVELOPMENT;
 
@@ -20,7 +19,6 @@ export const signup = async (user) => {
     body: JSON.stringify(user),
   })
     .then((response) => {
-      //   console.log(response.statusText);
       return response.json();
     })
     .catch((err) => {
@@ -51,13 +49,12 @@ export const logIn = async (user) => {
 export const logOut = async (next) => {
   removeCookie("token_user");
   removeLocalStorage("user");
-  // next();
+
   let url = `${API}/users/logout`;
   return fetch(url, {
     method: "GET",
   })
     .then((response) => {
-      // console.log("Logout Success");
       return response;
     })
     .catch((err) => {
@@ -101,7 +98,6 @@ export const removeLocalStorage = (key) => {
 };
 
 export const authenticate = (data, user, next) => {
-  // console.log(data.token, data.user, data);
   if (user == "user") {
     setCookie("token_user", data.token);
     setLocalStorage(user, data.user);
@@ -121,9 +117,7 @@ export const isAuth = async (user) => {
     }
     if (cookieChecked) {
       if (localStorage.getItem(user)) {
-        // console.log(typeof localStorage.getItem("user"));
         return JSON.parse(localStorage.getItem(user));
-        // return JSON.parse(localStorage.getItem("user"));
       } else {
         return false;
       }

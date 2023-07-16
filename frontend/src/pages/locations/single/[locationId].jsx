@@ -3,7 +3,6 @@ import Layout from "components/Layout";
 import { oneLocation } from "actions/location";
 import { useRouter } from "next/router";
 import Device from "components/device/Device";
-import Link from "next/link";
 
 const SingleLocation = () => {
   const router = useRouter();
@@ -136,8 +135,6 @@ const SingleLocation = () => {
               <div className="grid   grid-cols-10 md:grid-cols-7 bg-primary-400 p-4 rounded-xl text-white text-xl font-sb ">
                 <h2 className="hidden md:block">Image</h2>
                 <h2>Serial Number</h2>
-                {/* <h2 className="hidden md:block">Email</h2>
-            <h2>Role</h2> */}
                 <h2>Status</h2>
                 <h2>Type</h2>
                 <h2 className="text-center col-span-2 md:col-span-1 mr-2 md:mr-0">
@@ -155,7 +152,7 @@ const SingleLocation = () => {
                 {allData &&
                   allData.devices &&
                   allData.devices.map((device) => {
-                    return <Device device={device} />;
+                    return <Device device={device} all={false} />;
                   })}
               </div>
             </div>

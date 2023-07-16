@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Layout from "components/Layout";
-
 import { getCookie } from "actions/auth";
 import { createDevice } from "actions/device";
 import { locationNameId } from "actions/location";
@@ -43,12 +42,6 @@ const CreateDevice = () => {
     });
     getNames();
   }, []);
-
-  // useEffect(() => {
-  //   if (getCookie("token_user")) {
-  //     Router.push(`/`);
-  //   }
-  // }, []);
 
   const getNames = async () => {
     await locationNameId()
@@ -141,7 +134,6 @@ const CreateDevice = () => {
     for (const key in data) {
       formData.append(key, data[key]);
       setValues({ ...values, formData });
-      // console.log(`${key}: ${phone[key]}`);
     }
 
     let token = getCookie("token_user");
@@ -191,9 +183,6 @@ const CreateDevice = () => {
       });
   };
 
-  //   const handleChange = (name) => (e) => {
-  //     setValues({ ...values, error: false, [name]: e.target.value });
-  //   };
   const handleChange = (name) => (e) => {
     e.preventDefault();
     let value = name == "images" ? e.target.files[0] : e.target.value;
@@ -209,23 +198,14 @@ const CreateDevice = () => {
   return (
     <Layout>
       {alert.error && (
-        <Message
-          message={alert.message}
-          // alert={"error"}
-          resetAlert={resetAlert}
-        />
+        <Message message={alert.message} resetAlert={resetAlert} />
       )}
       {alert.success && (
-        <Message
-          message={alert.message}
-          // alert={"success"}
-          resetAlert={resetAlert}
-        />
+        <Message message={alert.message} resetAlert={resetAlert} />
       )}
       {alert.loading && (
         <Message
           message={"Loading...Please Waite..."}
-          // alert={"loading"}
           resetAlert={resetAlert}
         />
       )}
@@ -259,7 +239,6 @@ const CreateDevice = () => {
               type="text"
               value={type}
               onChange={handleChange("type")}
-              //   class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
               className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
               placeholder="Select Type"
             >
@@ -273,13 +252,6 @@ const CreateDevice = () => {
                 <h2 className="text-red-500 ">Please select a Type</h2>
               </div>
             )}
-            {/* <input
-              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
-              type="text"
-              placeholder="Enter type"
-              value={type}
-              onChange={handleChange("type")}
-            /> */}
           </div>
           <div className="grid grid-cols-3 mt-1 mb-1">
             <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl">
@@ -289,7 +261,6 @@ const CreateDevice = () => {
               type="text"
               value={status}
               onChange={handleChange("status")}
-              //   class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
               className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
               placeholder="Select Status"
             >
@@ -302,13 +273,6 @@ const CreateDevice = () => {
                 <h2 className="text-red-500 ">Please select Status</h2>
               </div>
             )}
-            {/* <input
-              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
-              type="text"
-              placeholder="Enter status"
-              value={status}
-              onChange={handleChange("status")}
-            /> */}
           </div>
           <div className="grid grid-cols-3 mt-1 mb-1">
             <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl">
@@ -318,9 +282,6 @@ const CreateDevice = () => {
             <h2
               className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
               type="text"
-              //   placeholder="Select Location"
-              //   value={locationName}
-              //   onChange={handleChange("location")}
             >
               {locationName}
             </h2>

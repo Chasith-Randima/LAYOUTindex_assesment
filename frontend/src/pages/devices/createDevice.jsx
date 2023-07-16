@@ -5,12 +5,12 @@ import { getCookie } from "actions/auth";
 import { createDevice } from "actions/device";
 import { locationNameId } from "actions/location";
 import Message from "components/Message";
+import { useRouter } from "next/router";
 
 const CreateDevice = () => {
   const [locationNames, setLocationNames] = useState();
   const [error, setError] = useState(false);
-  // const [validationError, setValidationError] = useState();
-  // let validationError = "";
+  const router = useRouter();
   const [values, setValues] = useState({
     serialNumber: "",
     type: "",
@@ -19,28 +19,6 @@ const CreateDevice = () => {
     images: "",
     formData: "",
   });
-
-  // const [formValidation, setFormValidation] = useState({
-  //   serialNumberForm: false,
-  //   typeForm: false,
-  //   statusForm: false,
-  //   locationForm: false,
-  //   imagesFomr: false,
-  //   serialNumberMsg: "",
-  //   typeMsg: "",
-  //   statusMsg: "",
-  //   locationMsg: "",
-  //   imagesMsg: "",
-  // });
-  // useEffect(() => {
-  //   validateForm();
-  // }, [
-  //   formValidation.serialNumberForm,
-  //   formValidation.typeForm,
-  //   formValidation.statusForm,
-  //   formValidation.locationForm,
-  //   formValidation.imagesFomr,
-  // ]);
 
   const [alert, setAlert] = useState({
     message: "",
@@ -57,12 +35,6 @@ const CreateDevice = () => {
     setValues({ formData: new FormData() });
     getNames();
   }, []);
-
-  // useEffect(() => {
-  //   if (getCookie("token_user")) {
-  //     Router.push(`/`);
-  //   }
-  // }, []);
 
   const getNames = async () => {
     await locationNameId()
@@ -107,116 +79,9 @@ const CreateDevice = () => {
   };
 
   const { serialNumber, type, status, images, location, formData } = values;
-  // const validateForm = () => {
-  //   if (!values.serialNumber) {
-  //     setFormValidation({
-  //       ...formValidation,
-  //       serialNumberForm: true,
-  //       serialNumberMsg: "Please enter a serial number",
-  //     });
-  //     validationError = formValidation.serialNumberMsg;
-  //     // setValidationError(formValidation.serialNumberMsg);
-  //     return true;
-  //   } else {
-  //     setFormValidation({
-  //       // ...formValidation,
-  //       serialNumberForm: !formValidation.serialNumberForm,
-  //       serialNumberMsg: "",
-  //     });
-  //     console.log(formValidation.serialNumberForm);
-  //   }
-  //   if (!values.type || values.type.length <= 0) {
-  //     setFormValidation({
-  //       ...formValidation,
-  //       typeForm: true,
-  //       typeMsg: "Please enter a Type",
-  //     });
-  //     validationError = formValidation.typeMsg;
-  //     // setValidationError(formValidation.typeMsg);
-  //     return true;
-  //   } else {
-  //     setFormValidation({
-  //       ...formValidation,
-  //       typeForm: false,
-  //       typeMsg: "",
-  //     });
-  //   }
-  //   if (!values.status || values.status.length <= 0) {
-  //     setFormValidation({
-  //       ...formValidation,
-  //       statusForm: true,
-  //       statusMsg: "Please enter a status",
-  //     });
-  //     validationError = formValidation.statusMsg;
-  //     // setValidationError(formValidation.statusMsg);
-  //     return true;
-  //   } else {
-  //     setFormValidation({
-  //       ...formValidation,
-  //       statusForm: false,
-  //       statusMsg: "",
-  //     });
-  //   }
-  //   if (!values.status || values.status.length <= 0) {
-  //     setFormValidation({
-  //       ...formValidation,
-  //       statusForm: true,
-  //       statusMsg: "Please enter a status",
-  //     });
-  //     validationError = formValidation.statusMsg;
-  //     // setValidationError(formValidation.statusMsg);
-  //     return true;
-  //   } else {
-  //     setFormValidation({
-  //       ...formValidation,
-  //       statusForm: false,
-  //       statusMsg: "",
-  //     });
-  //   }
-  //   if (!values.location || values.location.length <= 0) {
-  //     setFormValidation({
-  //       ...formValidation,
-  //       locationForm: true,
-  //       locationMsg: "Please enter a location",
-  //     });
-  //     validationError = formValidation.locationMsg;
-  //     // setValidationError(formValidation.locationMsg);
-  //     return true;
-  //   } else {
-  //     setFormValidation({
-  //       ...formValidation,
-  //       locationForm: false,
-  //       locationMsg: "",
-  //     });
-  //   }
-  //   if (!values.images || values.images.length <= 0) {
-  //     setFormValidation({
-  //       ...formValidation,
-  //       imagesForm: true,
-  //       imagesMsg: "Please select a Image",
-  //     });
-  //     validationError = formValidation.imagesMsg;
-  //     // setValidationError(formValidation.imagesMsg);
-  //     return true;
-  //   } else {
-  //     setFormValidation({
-  //       ...formValidation,
-  //       imagesForm: false,
-  //       imagesMsg: "",
-  //     });
-  //   }
-  //   validationError = "";
-  //   // setValidationError("");
-  //   return false;
-  // };
 
   const handleSubmit = (e) => {
-    // handleSubmit = (e) => {
     e.preventDefault();
-    // if (validateForm()) {
-    //   return;
-    // }
-    // validateForm();
 
     // -----------------------------------
     if (!values.serialNumber || values.serialNumber.length <= 0) {
@@ -254,7 +119,6 @@ const CreateDevice = () => {
     for (const key in data) {
       formData.append(key, data[key]);
       setValues({ ...values, formData });
-      // console.log(`${key}: ${phone[key]}`);
     }
 
     let token = getCookie("token_user");
@@ -268,6 +132,7 @@ const CreateDevice = () => {
             type: "",
             status: "",
             images: "",
+            location: "",
           });
           setError(false);
           setAlert({
@@ -280,7 +145,7 @@ const CreateDevice = () => {
           window.setTimeout(() => {
             setAlert({ ...alert, success: false, message: "" });
           }, 1000);
-
+          router.reload();
           //   router.push(`/`);
         } else {
           setAlert({
@@ -304,14 +169,11 @@ const CreateDevice = () => {
       });
   };
 
-  //   const handleChange = (name) => (e) => {
-  //     setValues({ ...values, error: false, [name]: e.target.value });
-  //   };
   const handleChange = (name) => (e) => {
     e.preventDefault();
     let value = name == "images" ? e.target.files[0] : e.target.value;
     if (name == "images") {
-      console.log(name, value, "workin..");
+      // console.log(name, value, "workin..");
       formData.append(name, value);
       setValues({ ...values, [name]: value, formData });
     } else {
@@ -347,22 +209,15 @@ const CreateDevice = () => {
         <h2 className="text-gray-400 text-2xl mt-2 mb-2 font-semibold ">
           Create Device
         </h2>
-        {/* {validationError && (
-          <div className="w-full h-10 flex justify-center bg-red-500 border-red-600 border-4 rounded-lg">
-            <h2 className="text-xl font-bold text-white">{validationError}</h2>
-          </div>
-        )} */}
+
         <form>
           <div className="grid grid-cols-3 mt-1 mb-1">
             <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200  font-bold text-xl text-gray-600">
               Serial Number
             </label>
-            {/* {console.log(formValidation)} */}
+
             <input
               className={
-                // formValidation.serialNumberForm
-                //   ? "col-span-2 p-2 rounded-lg ml-2 bg-red-200 font-bold text-lg border-red-500 border-4"
-                // :
                 "col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg outline-none text-gray-600"
               }
               type="text"
@@ -384,12 +239,7 @@ const CreateDevice = () => {
               type="text"
               value={type}
               onChange={handleChange("type")}
-              //   class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
-              // className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
               className={
-                //   formValidation.typeForm
-                // ? "col-span-2 p-2 rounded-lg ml-2 bg-red-200 font-bold text-lg border-red-500 border-4"
-                // :
                 "col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg text-gray-600"
               }
               placeholder="Select Type"
@@ -404,13 +254,6 @@ const CreateDevice = () => {
                 <h2 className="text-red-500 ">Please select a Type</h2>
               </div>
             )}
-            {/* <input
-              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
-              type="text"
-              placeholder="Enter type"
-              value={type}
-              onChange={handleChange("type")}
-            /> */}
           </div>
           <div className="grid grid-cols-3 mt-1 mb-1">
             <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl text-gray-600">
@@ -418,15 +261,9 @@ const CreateDevice = () => {
             </label>
             <select
               type="text"
-              value={type}
+              value={status}
               onChange={handleChange("status")}
-              //   class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
-              // className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
-
               className={
-                // formValidation.statusForm
-                //   ? "col-span-2 p-2 rounded-lg ml-2 bg-red-200 font-bold text-lg border-red-500 border-4"
-                // :
                 "col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg text-gray-600"
               }
               placeholder="Select Status"
@@ -440,13 +277,6 @@ const CreateDevice = () => {
                 <h2 className="text-red-500 ">Please select Status</h2>
               </div>
             )}
-            {/* <input
-              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
-              type="text"
-              placeholder="Enter status"
-              value={status}
-              onChange={handleChange("status")}
-            /> */}
           </div>
           <div className="grid grid-cols-3 mt-1 mb-1">
             <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl text-gray-600">
@@ -454,14 +284,9 @@ const CreateDevice = () => {
             </label>
             <select
               type="text"
-              value={type}
+              value={location}
               onChange={handleChange("location")}
-              //   class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
-              // className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
               className={
-                // formValidation.locationForm
-                //   ? "col-span-2 p-2 rounded-lg ml-2 bg-red-200 font-bold text-lg border-red-500 border-4"
-                // :
                 "col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg text-gray-600"
               }
               placeholder="Select a Location"
@@ -485,29 +310,17 @@ const CreateDevice = () => {
                 <h2 className="text-red-500 ">Please select location</h2>
               </div>
             )}
-            {/* <input
-              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
-              type="text"
-              placeholder="Select Location"
-              value={location}
-              onChange={handleChange("location")}
-            /> */}
           </div>
           <div className="grid grid-cols-3 mt-1 mb-1">
             <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl text-gray-600">
               Image
             </label>
             <input
-              // className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
               className={
-                // formValidation.imagesFomr
-                //   ? "col-span-2 p-2 rounded-lg ml-2 bg-red-200 font-bold text-lg border-red-500 border-4"
-                // :
                 "col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg text-gray-600"
               }
               type="file"
               placeholder="SelectImage"
-              //   value={images}
               onChange={handleChange("images")}
             />
             {error && !images && (

@@ -57,27 +57,11 @@ const Sidebar = ({ showSideBar }) => {
 
   return (
     <>
-      {/* <div className={`${showSideBar ? "" : "hidden"}`}> */}
-      {/* <div> */}
       <h2 className="text-gray-400 text-xl font-semibold my-3 md:my-1">
         Dashboard
       </h2>
-      {/* {console.log(userId, patientId, doctorId)} */}
-      {/* <div> */}
-      {/* {userId &&
-        JSON.parse(localStorage.getItem("user")).role == "admin" &&
-        adminSidebar()}
-      {userId &&
-        JSON.parse(localStorage.getItem("user")).role != "admin" &&
-        staffSidebar()}
 
-      {patientId && patientSidebar()}
-      {doctorId && doctorSidebar()} */}
       {userId && userSidebar()}
-
-      {/* </div> */}
-      {/* </div> */}
-      {/* </div> */}
     </>
   );
 };

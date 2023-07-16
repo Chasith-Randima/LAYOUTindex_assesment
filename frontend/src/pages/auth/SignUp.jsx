@@ -1,21 +1,12 @@
 import React from "react";
-import { useState, useEffect } from "react";
-// import Layout from "../../components/Layout";
-// import Router from "next/router";
-import { getCookie, isAuth, signup } from "../../../actions/auth";
+import { useState } from "react";
 import Link from "next/link";
-// import Message from "../../components/Message";
-import Message from "components/Message";
-import {
-  FaFacebookF,
-  FaLinkedinIn,
-  FaGoogle,
-  FaRegEnvelope,
-  FaUser,
-} from "react-icons/fa";
+import Message from "components/MessageAuth";
+import { FaRegEnvelope } from "react-icons/fa";
 import { MdLockOutline } from "react-icons/md";
 import { AiOutlineUser } from "react-icons/ai";
 import { useRouter } from "next/router";
+import { signup } from "actions/auth";
 
 const SignUp = () => {
   const router = useRouter();
@@ -41,12 +32,6 @@ const SignUp = () => {
   const resetAlert = () => {
     setAlert({ message: "", error: false, loading: false, success: false });
   };
-
-  // useEffect(() => {
-  //   if (getCookie("token_user")) {
-  //     Router.push(`/`);
-  //   }
-  // }, []);
 
   const { name, email, password, passwordConfirm, error, loading, message } =
     values;
@@ -84,7 +69,7 @@ const SignUp = () => {
 
     setAlert({ ...alert, loading: true });
     setValues({ ...values, loading: true, error: false });
-    // console.log(values);
+
     const user = {
       name,
       email,
@@ -94,7 +79,6 @@ const SignUp = () => {
     signup(user)
       .then((data) => {
         if (data.status && data.status == "success") {
-          // console.log(data);
           setValues({
             ...values,
             name: "",
@@ -153,25 +137,15 @@ const SignUp = () => {
 
   return (
     <>
-      {/* <Layout> */}
       {alert.error && (
-        <Message
-          message={alert.message}
-          // alert={"error"}
-          resetAlert={resetAlert}
-        />
+        <Message message={alert.message} resetAlert={resetAlert} />
       )}
       {alert.success && (
-        <Message
-          message={alert.message}
-          // alert={"success"}
-          resetAlert={resetAlert}
-        />
+        <Message message={alert.message} resetAlert={resetAlert} />
       )}
       {alert.loading && (
         <Message
           message={"Loading...Please Waite..."}
-          // alert={"loading"}
           resetAlert={resetAlert}
         />
       )}
@@ -184,20 +158,6 @@ const SignUp = () => {
                   Create Account
                 </h2>
                 <div className="border-2 w-10 border-primary-500 inline-block mb-2"></div>
-
-                {/* <div className='flex justify-center my-2'>
-                <a href='#' className='border-2 border-gray-200 rounded-full p-3 mx-1'>
-                  <FaFacebookF className='text-sm' />
-                </a>
-                <a href='#' className='border-2 border-gray-200 rounded-full p-3 mx-1'>
-                  <FaLinkedinIn className='text-sm' />
-                </a>
-                <a href='#' className='border-2 border-gray-200 rounded-full p-3 mx-1'>
-                  <FaGoogle className='text-sm' />
-                </a>
-              </div>
-              
-              <p className='text-gray-400 my-3'>or use your email for registration</p> */}
 
                 <div className="mt-10 flex flex-col items-center">
                   <div className="bg-gray-100 w-64 p-2 flex items-center mb-3">
@@ -266,15 +226,11 @@ const SignUp = () => {
                       className="bg-gray-100 outline-none text-sm"
                     />
                   </div>
-                  {tempError &&
-                    // passwordConfirm?.length <= 0 &&
-                    password != passwordConfirm && (
-                      <div className="flex justify-center col-span-3 border-red-500 border-2 rounded-lg mt-1 mb-1">
-                        <h2 className="text-red-500 ">
-                          Passwords dosent match
-                        </h2>
-                      </div>
-                    )}
+                  {tempError && password != passwordConfirm && (
+                    <div className="flex justify-center col-span-3 border-red-500 border-2 rounded-lg mt-1 mb-1">
+                      <h2 className="text-red-500 ">Passwords dosent match</h2>
+                    </div>
+                  )}
                   <button
                     onClick={handleSubmit}
                     className="border-2 border-primary-500 text-primary-500 rounded-full px-11 py-1 font-semibold hover:bg-primary-500 hover:text-white"
@@ -286,13 +242,6 @@ const SignUp = () => {
             </div>
 
             <div className="md:w-2/5 bg-primary-500 text-white rounded-tr-2xl rounded-br-2xl md:py-36 md:px-16 pb-3">
-              {/* <img
-                src="/img/opd-logo.png"
-                alt="logo"
-                height={250}
-                width={250}
-                className="item-center item"
-              /> */}
               <h2 className="item-center item font-bold text-2xl text-white">
                 LAYOUTindex
               </h2>

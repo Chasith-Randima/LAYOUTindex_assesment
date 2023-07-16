@@ -1,8 +1,5 @@
 import fetch from "isomorphic-fetch";
-import cookie from "js-cookie";
 import axios from "axios";
-
-// import Router from "next/router";
 
 let API = process.env.NEXT_PUBLIC_API_DEVELOPMENT;
 
@@ -38,17 +35,10 @@ export const allLocations = (paramsData) => {
 
   return axios(url, {
     method: "GET",
-    // params: { ...query },
+
     params: {
       page: paramsData.page,
       limit: paramsData.limit,
-      //   name: paramsData.name,
-      //   city: paramsData.city,
-      //   brandname: paramsData.brandname,
-      //   location: paramsData.location,
-      //   "price[gte]": paramsData.priceMin,
-      //   "price[lte]": paramsData.priceMax,
-      //   sort: paramsData.sort,
     },
   })
     .then((response) => {
@@ -65,18 +55,6 @@ export const oneLocation = (id) => {
 
   return axios(url, {
     method: "GET",
-    // params: { ...query },
-    // params: {
-    //   page: paramsData.page,
-    //   limit: paramsData.limit,
-    //   name: paramsData.name,
-    //   city: paramsData.city,
-    //   //   brandname: paramsData.brandname,
-    //   //   location: paramsData.location,
-    //   //   "price[gte]": paramsData.priceMin,
-    //   //   "price[lte]": paramsData.priceMax,
-    //   //   sort: paramsData.sort,
-    // },
   })
     .then((response) => {
       console.log(response.data);

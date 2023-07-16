@@ -32,7 +32,7 @@ const UpdateLocation = () => {
 
   const getLocation = async () => {
     let locationId = router.query.locationId;
-    // console.log(deviceId);
+
     await oneLocation(locationId)
       .then((data) => {
         if (data.status && data.status == "success") {
