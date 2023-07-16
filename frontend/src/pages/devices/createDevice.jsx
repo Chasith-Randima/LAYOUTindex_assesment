@@ -8,6 +8,9 @@ import Message from "components/Message";
 
 const CreateDevice = () => {
   const [locationNames, setLocationNames] = useState();
+  const [error, setError] = useState(false);
+  // const [validationError, setValidationError] = useState();
+  // let validationError = "";
   const [values, setValues] = useState({
     serialNumber: "",
     type: "",
@@ -16,6 +19,28 @@ const CreateDevice = () => {
     images: "",
     formData: "",
   });
+
+  // const [formValidation, setFormValidation] = useState({
+  //   serialNumberForm: false,
+  //   typeForm: false,
+  //   statusForm: false,
+  //   locationForm: false,
+  //   imagesFomr: false,
+  //   serialNumberMsg: "",
+  //   typeMsg: "",
+  //   statusMsg: "",
+  //   locationMsg: "",
+  //   imagesMsg: "",
+  // });
+  // useEffect(() => {
+  //   validateForm();
+  // }, [
+  //   formValidation.serialNumberForm,
+  //   formValidation.typeForm,
+  //   formValidation.statusForm,
+  //   formValidation.locationForm,
+  //   formValidation.imagesFomr,
+  // ]);
 
   const [alert, setAlert] = useState({
     message: "",
@@ -82,9 +107,126 @@ const CreateDevice = () => {
   };
 
   const { serialNumber, type, status, images, location, formData } = values;
+  // const validateForm = () => {
+  //   if (!values.serialNumber) {
+  //     setFormValidation({
+  //       ...formValidation,
+  //       serialNumberForm: true,
+  //       serialNumberMsg: "Please enter a serial number",
+  //     });
+  //     validationError = formValidation.serialNumberMsg;
+  //     // setValidationError(formValidation.serialNumberMsg);
+  //     return true;
+  //   } else {
+  //     setFormValidation({
+  //       // ...formValidation,
+  //       serialNumberForm: !formValidation.serialNumberForm,
+  //       serialNumberMsg: "",
+  //     });
+  //     console.log(formValidation.serialNumberForm);
+  //   }
+  //   if (!values.type || values.type.length <= 0) {
+  //     setFormValidation({
+  //       ...formValidation,
+  //       typeForm: true,
+  //       typeMsg: "Please enter a Type",
+  //     });
+  //     validationError = formValidation.typeMsg;
+  //     // setValidationError(formValidation.typeMsg);
+  //     return true;
+  //   } else {
+  //     setFormValidation({
+  //       ...formValidation,
+  //       typeForm: false,
+  //       typeMsg: "",
+  //     });
+  //   }
+  //   if (!values.status || values.status.length <= 0) {
+  //     setFormValidation({
+  //       ...formValidation,
+  //       statusForm: true,
+  //       statusMsg: "Please enter a status",
+  //     });
+  //     validationError = formValidation.statusMsg;
+  //     // setValidationError(formValidation.statusMsg);
+  //     return true;
+  //   } else {
+  //     setFormValidation({
+  //       ...formValidation,
+  //       statusForm: false,
+  //       statusMsg: "",
+  //     });
+  //   }
+  //   if (!values.status || values.status.length <= 0) {
+  //     setFormValidation({
+  //       ...formValidation,
+  //       statusForm: true,
+  //       statusMsg: "Please enter a status",
+  //     });
+  //     validationError = formValidation.statusMsg;
+  //     // setValidationError(formValidation.statusMsg);
+  //     return true;
+  //   } else {
+  //     setFormValidation({
+  //       ...formValidation,
+  //       statusForm: false,
+  //       statusMsg: "",
+  //     });
+  //   }
+  //   if (!values.location || values.location.length <= 0) {
+  //     setFormValidation({
+  //       ...formValidation,
+  //       locationForm: true,
+  //       locationMsg: "Please enter a location",
+  //     });
+  //     validationError = formValidation.locationMsg;
+  //     // setValidationError(formValidation.locationMsg);
+  //     return true;
+  //   } else {
+  //     setFormValidation({
+  //       ...formValidation,
+  //       locationForm: false,
+  //       locationMsg: "",
+  //     });
+  //   }
+  //   if (!values.images || values.images.length <= 0) {
+  //     setFormValidation({
+  //       ...formValidation,
+  //       imagesForm: true,
+  //       imagesMsg: "Please select a Image",
+  //     });
+  //     validationError = formValidation.imagesMsg;
+  //     // setValidationError(formValidation.imagesMsg);
+  //     return true;
+  //   } else {
+  //     setFormValidation({
+  //       ...formValidation,
+  //       imagesForm: false,
+  //       imagesMsg: "",
+  //     });
+  //   }
+  //   validationError = "";
+  //   // setValidationError("");
+  //   return false;
+  // };
 
   const handleSubmit = (e) => {
+    // handleSubmit = (e) => {
     e.preventDefault();
+    // if (validateForm()) {
+    //   return;
+    // }
+    // validateForm();
+
+    // -----------------------------------
+    if (!values.serialNumber || values.serialNumber.length <= 0) {
+      setError(true);
+      return;
+    }
+    if (!values.type || values.type.length <= 0) {
+      setError(true);
+    }
+    // -----------------------------------
     setAlert({ ...alert, loading: true });
     setValues({ ...values, loading: true, error: false });
     // console.log(values);
@@ -161,6 +303,7 @@ const CreateDevice = () => {
     } else {
       setValues({ ...values, [name]: value });
     }
+    // validateForm();
   };
 
   return (
@@ -190,18 +333,34 @@ const CreateDevice = () => {
         <h2 className="text-gray-400 text-2xl mt-2 mb-2 font-semibold ">
           Create Device
         </h2>
+        {/* {validationError && (
+          <div className="w-full h-10 flex justify-center bg-red-500 border-red-600 border-4 rounded-lg">
+            <h2 className="text-xl font-bold text-white">{validationError}</h2>
+          </div>
+        )} */}
         <form>
           <div className="grid grid-cols-3 mt-1 mb-1">
-            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl">
+            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200  font-bold text-xl">
               Serial Number
             </label>
+            {/* {console.log(formValidation)} */}
             <input
-              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+              className={
+                // formValidation.serialNumberForm
+                //   ? "col-span-2 p-2 rounded-lg ml-2 bg-red-200 font-bold text-lg border-red-500 border-4"
+                // :
+                "col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+              }
               type="text"
               value={serialNumber}
               onChange={handleChange("serialNumber")}
               placeholder="Enter Serial Number"
             />
+            {error && !serialNumber && (
+              <div className="flex justify-center col-span-3 border-red-500 border-2 rounded-lg mt-1 mb-1">
+                <h2 className="text-red-500 ">Please add a serial number</h2>
+              </div>
+            )}
           </div>
           <div className="grid grid-cols-3 mt-1 mb-1">
             <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl">
@@ -212,7 +371,13 @@ const CreateDevice = () => {
               value={type}
               onChange={handleChange("type")}
               //   class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
-              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+              // className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+              className={
+                //   formValidation.typeForm
+                // ? "col-span-2 p-2 rounded-lg ml-2 bg-red-200 font-bold text-lg border-red-500 border-4"
+                // :
+                "col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+              }
               placeholder="Select Type"
             >
               <option value={"none"}>Select Type</option>
@@ -237,7 +402,14 @@ const CreateDevice = () => {
               value={type}
               onChange={handleChange("status")}
               //   class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
-              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+              // className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+
+              className={
+                // formValidation.statusForm
+                //   ? "col-span-2 p-2 rounded-lg ml-2 bg-red-200 font-bold text-lg border-red-500 border-4"
+                // :
+                "col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+              }
               placeholder="Select Status"
             >
               <option value={"none"}>Select Status</option>
@@ -261,7 +433,13 @@ const CreateDevice = () => {
               value={type}
               onChange={handleChange("location")}
               //   class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
-              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+              // className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+              className={
+                // formValidation.locationForm
+                //   ? "col-span-2 p-2 rounded-lg ml-2 bg-red-200 font-bold text-lg border-red-500 border-4"
+                // :
+                "col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+              }
               placeholder="Select a Location"
             >
               <option>Select A Location</option>
@@ -291,7 +469,13 @@ const CreateDevice = () => {
               Image
             </label>
             <input
-              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+              // className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+              className={
+                // formValidation.imagesFomr
+                //   ? "col-span-2 p-2 rounded-lg ml-2 bg-red-200 font-bold text-lg border-red-500 border-4"
+                // :
+                "col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+              }
               type="file"
               placeholder="SelectImage"
               //   value={images}
