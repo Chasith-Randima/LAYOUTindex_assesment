@@ -68,18 +68,12 @@ const AllDevices = () => {
     }
     let params;
     setAlert({ ...alert, loading: true });
-    if (JSON.parse(localStorage.getItem("user")).role == "user") {
-      params = {
-        limit,
-        page,
-        user: JSON.parse(localStorage.getItem("user"))._id,
-      };
-    } else {
-      params = {
-        limit,
-        page,
-      };
-    }
+
+    params = {
+      limit,
+      page,
+    };
+
     let token = getCookie("token_user");
 
     await allDevices(params)

@@ -61,7 +61,7 @@ const Sidebar = ({ showSideBar }) => {
         Dashboard
       </h2>
 
-      {userId && userSidebar()}
+      {userId ? userSidebar() : <h2>Please Login to Access</h2>}
     </>
   );
 };
