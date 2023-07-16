@@ -40,50 +40,7 @@ const CreateDevice = () => {
       location: locationId,
       locationName: locationNameQ,
     });
-    getNames();
   }, []);
-
-  const getNames = async () => {
-    await locationNameId()
-      .then((data) => {
-        if (data.status && data.status == "success") {
-          console.log(data);
-
-          setLocationNames(data);
-
-          setAlert({
-            ...alert,
-            loading: false,
-            message: data.message,
-            error: false,
-            success: true,
-          });
-          window.setTimeout(() => {
-            setAlert({ ...alert, success: false, message: "" });
-          }, 1000);
-
-          //   router.push(`/`);
-        } else {
-          setAlert({
-            ...alert,
-            loading: false,
-            message: data.message,
-            error: true,
-            success: false,
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        setAlert({
-          ...alert,
-          loading: false,
-          message: err.message,
-          error: true,
-          success: false,
-        });
-      });
-  };
 
   const {
     serialNumber,
