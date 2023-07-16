@@ -19,6 +19,8 @@ const UpdateDevice = () => {
     formData: "",
   });
 
+  const [error, setError] = useState(false);
+
   const [alert, setAlert] = useState({
     message: "",
     error: false,
@@ -98,7 +100,8 @@ const UpdateDevice = () => {
             type: data.device.type,
             status: data.device.status,
             location: data.device.location,
-            images: data.device.images,
+            formData: new FormData(),
+            // images: data.device.images,
           });
 
           setAlert({
@@ -139,6 +142,30 @@ const UpdateDevice = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // -----------------------------------
+    if (!values.serialNumber || values.serialNumber.length <= 0) {
+      setError(true);
+      return;
+    }
+    if (!values.type || values.type.length <= 0) {
+      setError(true);
+      return;
+    }
+    if (!values.status || values.status.length <= 0) {
+      setError(true);
+      return;
+    }
+    if (!values.location || values.location.length <= 0) {
+      setError(true);
+      return;
+    }
+    if (!values.images || values.images.length <= 0) {
+      setError(true);
+      return;
+    }
+    // -----------------------------------
+
     setAlert({ ...alert, loading: true });
     setValues({ ...values, loading: true, error: false });
     // console.log(values);
@@ -169,6 +196,7 @@ const UpdateDevice = () => {
             status: "",
             images: "",
           });
+          setError(false);
           setAlert({
             ...alert,
             loading: false,
@@ -242,24 +270,29 @@ const UpdateDevice = () => {
         />
       )}
       <div className="m-5">
-        <h2 className="text-gray-400 text-2xl mt-2 mb-2 font-semibold ">
+        <h2 className="text-gray-600 text-2xl mt-2 mb-2 font-semibold ">
           Update Device
         </h2>
         <form>
           <div className="grid grid-cols-3 mt-1 mb-1">
-            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl">
+            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl text-gray-600">
               Serial Number
             </label>
             <input
-              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg outline-none text-gray-600"
               type="text"
               value={serialNumber}
               onChange={handleChange("serialNumber")}
               placeholder="Enter Serial Number"
             />
+            {error && !serialNumber && (
+              <div className="flex justify-center col-span-3 border-red-500 border-2 rounded-lg mt-1 mb-1">
+                <h2 className="text-red-500 ">Please add a serial number</h2>
+              </div>
+            )}
           </div>
           <div className="grid grid-cols-3 mt-1 mb-1">
-            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl">
+            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl text-gray-600">
               type
             </label>
             <select
@@ -267,14 +300,19 @@ const UpdateDevice = () => {
               value={type}
               onChange={handleChange("type")}
               //   class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
-              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg outline-none text-gray-600"
               placeholder="Select Type"
             >
-              <option value={"none"}>Select Type</option>
+              <option value={""}>Select Type</option>
               <option value={"pos"}>Pos</option>
               <option value={"kisok"}>Kisok</option>
               <option value={"signage"}>Signage</option>
             </select>
+            {error && type?.length <= 0 && (
+              <div className="flex justify-center col-span-3 border-red-500 border-2 rounded-lg mt-1 mb-1">
+                <h2 className="text-red-500 ">Please add a Type</h2>
+              </div>
+            )}
             {/* <input
               className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
               type="text"
@@ -284,7 +322,7 @@ const UpdateDevice = () => {
             /> */}
           </div>
           <div className="grid grid-cols-3 mt-1 mb-1">
-            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl">
+            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl text-gray-600">
               status
             </label>
             <select
@@ -292,13 +330,18 @@ const UpdateDevice = () => {
               value={status}
               onChange={handleChange("status")}
               //   class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
-              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg outline-none text-gray-600"
               placeholder="Select Status"
             >
-              <option value={"none"}>Select Status</option>
+              <option value={""}>Select Status</option>
               <option value={"active"}>Active</option>
               <option value={"inactive"}>Inactive</option>
             </select>
+            {error && status?.length <= 0 && (
+              <div className="flex justify-center col-span-3 border-red-500 border-2 rounded-lg mt-1 mb-1">
+                <h2 className="text-red-500 ">Please select Status</h2>
+              </div>
+            )}
             {/* <input
               className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
               type="text"
@@ -308,7 +351,7 @@ const UpdateDevice = () => {
             /> */}
           </div>
           <div className="grid grid-cols-3 mt-1 mb-1">
-            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl">
+            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl text-gray-600">
               Location
             </label>
             <select
@@ -316,10 +359,10 @@ const UpdateDevice = () => {
               value={location}
               onChange={handleChange("location")}
               //   class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
-              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg outline-none text-gray-600"
               placeholder="Select a Location"
             >
-              <option>Select A Location</option>
+              <option value={""}>Select A Location</option>
               {locationNames &&
                 locationNames.doc.map((location, index) => {
                   return (
@@ -333,6 +376,11 @@ const UpdateDevice = () => {
                   );
                 })}
             </select>
+            {error && location?.length <= 0 && (
+              <div className="flex justify-center col-span-3 border-red-500 border-2 rounded-lg mt-1 mb-1">
+                <h2 className="text-red-500 ">Please select a Location</h2>
+              </div>
+            )}
             {/* <input
               className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
               type="text"
@@ -342,20 +390,25 @@ const UpdateDevice = () => {
             /> */}
           </div>
           <div className="grid grid-cols-3 mt-1 mb-1">
-            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl">
+            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl text-gray-600">
               Image
             </label>
             <input
-              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg outline-none text-gray-600"
               type="file"
               placeholder="SelectImage"
               //   value={images}
               onChange={handleChange("images")}
             />
+            {error && !images && (
+              <div className="flex justify-center col-span-3 border-red-500 border-2 rounded-lg mt-1 mb-1">
+                <h2 className="text-red-500 ">Please select a Image</h2>
+              </div>
+            )}
           </div>
           <div className="flex justify-center mt-3">
             <button
-              className="p-3 font-bold text-xl bg-blue-300 rounded-lg hover:bg-blue-500"
+              className="p-3 font-bold text-white text-xl bg-blue-300 rounded-lg hover:bg-blue-500"
               onClick={handleSubmit}
             >
               Update Device

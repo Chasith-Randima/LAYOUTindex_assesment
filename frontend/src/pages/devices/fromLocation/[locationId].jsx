@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 const CreateDevice = () => {
   const router = useRouter();
   const [locationNames, setLocationNames] = useState();
+  const [error, setError] = useState(false);
   const [values, setValues] = useState({
     serialNumber: "",
     type: "",
@@ -103,6 +104,29 @@ const CreateDevice = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // -----------------------------------
+    if (!values.serialNumber || values.serialNumber.length <= 0) {
+      setError(true);
+      return;
+    }
+    if (!values.type || values.type.length <= 0) {
+      setError(true);
+      return;
+    }
+    if (!values.status || values.status.length <= 0) {
+      setError(true);
+      return;
+    }
+    if (!values.location || values.location.length <= 0) {
+      setError(true);
+      return;
+    }
+    if (!values.images || values.images.length <= 0) {
+      setError(true);
+      return;
+    }
+    // -----------------------------------
     setAlert({ ...alert, loading: true });
     setValues({ ...values, loading: true, error: false });
     // console.log(values);
@@ -132,6 +156,7 @@ const CreateDevice = () => {
             status: "",
             images: "",
           });
+          setError(false);
           setAlert({
             ...alert,
             loading: false,
@@ -220,6 +245,11 @@ const CreateDevice = () => {
               onChange={handleChange("serialNumber")}
               placeholder="Enter Serial Number"
             />
+            {error && !serialNumber && (
+              <div className="flex justify-center col-span-3 border-red-500 border-2 rounded-lg mt-1 mb-1">
+                <h2 className="text-red-500 ">Please add a serial number</h2>
+              </div>
+            )}
           </div>
           <div className="grid grid-cols-3 mt-1 mb-1">
             <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl">
@@ -238,6 +268,11 @@ const CreateDevice = () => {
               <option value={"kisok"}>Kisok</option>
               <option value={"signage"}>Signage</option>
             </select>
+            {error && !type && (
+              <div className="flex justify-center col-span-3 border-red-500 border-2 rounded-lg mt-1 mb-1">
+                <h2 className="text-red-500 ">Please select a Type</h2>
+              </div>
+            )}
             {/* <input
               className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
               type="text"
@@ -252,7 +287,7 @@ const CreateDevice = () => {
             </label>
             <select
               type="text"
-              value={type}
+              value={status}
               onChange={handleChange("status")}
               //   class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
               className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
@@ -262,6 +297,11 @@ const CreateDevice = () => {
               <option value={"active"}>Active</option>
               <option value={"inactive"}>Inactive</option>
             </select>
+            {error && !status && (
+              <div className="flex justify-center col-span-3 border-red-500 border-2 rounded-lg mt-1 mb-1">
+                <h2 className="text-red-500 ">Please select Status</h2>
+              </div>
+            )}
             {/* <input
               className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
               type="text"
@@ -296,6 +336,11 @@ const CreateDevice = () => {
               //   value={images}
               onChange={handleChange("images")}
             />
+            {error && !images && (
+              <div className="flex justify-center col-span-3 border-red-500 border-2 rounded-lg mt-1 mb-1">
+                <h2 className="text-red-500 ">Please select a Images</h2>
+              </div>
+            )}
           </div>
           <div className="flex justify-center mt-3">
             <button

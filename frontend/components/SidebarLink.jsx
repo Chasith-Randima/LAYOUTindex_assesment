@@ -9,7 +9,7 @@ const SidebarLink = ({ link, title }) => {
         className={`  my-2 font-medium p-2 w-full  rounded-md  hover:bg-primary-300 hover:text-white transition-all ${
           router.asPath == `${link}`
             ? "bg-primary-300 text-white"
-            : "text-black bg-gray-300"
+            : "text-gray-600 bg-gray-300"
         }`}
       >
         {/* <h2 className="my-1 ml-2 text-xl">page 1</h2> */}

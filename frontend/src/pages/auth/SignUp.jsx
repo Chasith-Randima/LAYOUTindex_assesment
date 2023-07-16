@@ -29,6 +29,8 @@ const SignUp = () => {
     message: "",
   });
 
+  const [tempError, setTempError] = useState(false);
+
   const [alert, setAlert] = useState({
     message: "",
     error: false,
@@ -51,6 +53,35 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!values.name || values.name <= 0) {
+      setTempError(true);
+      return;
+    }
+    if (
+      !values.email ||
+      values.email.length <= 0 ||
+      !values.email
+        .toLowerCase()
+        .match(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )
+    ) {
+      setTempError(true);
+      return;
+    }
+    if (!values.password || values.password.length <= 0) {
+      setTempError(true);
+      return;
+    }
+    if (!values.passwordConfirm || values.passwordConfirm.length <= 0) {
+      setTempError(true);
+      return;
+    }
+    if (values?.password != values?.passwordConfirm) {
+      setTempError(true);
+      return;
+    }
+
     setAlert({ ...alert, loading: true });
     setValues({ ...values, loading: true, error: false });
     // console.log(values);
@@ -74,6 +105,7 @@ const SignUp = () => {
             loading: false,
             message: data.statusText,
           });
+          setTempError(false);
           setAlert({
             ...alert,
             loading: false,
@@ -179,6 +211,11 @@ const SignUp = () => {
                       className="bg-gray-100 outline-none text-sm"
                     />
                   </div>
+                  {tempError && name?.length <= 0 && (
+                    <div className="flex justify-center col-span-3 border-red-500 border-2 rounded-lg mt-1 mb-1">
+                      <h2 className="text-red-500 ">Please enter a name</h2>
+                    </div>
+                  )}
                   <div className="bg-gray-100 w-64 p-2 flex items-center mb-3">
                     <FaRegEnvelope className="text-gray-400 m-2" />
                     <input
@@ -190,6 +227,18 @@ const SignUp = () => {
                       className="bg-gray-100 outline-none text-sm"
                     />
                   </div>
+                  {tempError &&
+                    !email
+                      ?.toLowerCase()
+                      .match(
+                        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                      ) && (
+                      <div className="flex justify-center mb-2 pl-2 pr-2 border-red-500 border-2 rounded-lg ">
+                        <h2 className="text-red-500 ">
+                          Please enter a valid email
+                        </h2>
+                      </div>
+                    )}
                   <div className="bg-gray-100 w-64 p-2 flex items-center mb-3">
                     <MdLockOutline className="text-gray-400 m-2" />
                     <input
@@ -201,6 +250,11 @@ const SignUp = () => {
                       className="bg-gray-100 outline-none text-sm"
                     />
                   </div>
+                  {tempError && password?.length <= 0 && (
+                    <div className="flex justify-center col-span-3 border-red-500 border-2 rounded-lg mt-1 mb-1">
+                      <h2 className="text-red-500 ">Please Enter a Password</h2>
+                    </div>
+                  )}
                   <div className="bg-gray-100 w-64 p-2 flex items-center mb-3">
                     <MdLockOutline className="text-gray-400 m-2" />
                     <input
@@ -212,6 +266,15 @@ const SignUp = () => {
                       className="bg-gray-100 outline-none text-sm"
                     />
                   </div>
+                  {tempError &&
+                    // passwordConfirm?.length <= 0 &&
+                    password != passwordConfirm && (
+                      <div className="flex justify-center col-span-3 border-red-500 border-2 rounded-lg mt-1 mb-1">
+                        <h2 className="text-red-500 ">
+                          Passwords dosent match
+                        </h2>
+                      </div>
+                    )}
                   <button
                     onClick={handleSubmit}
                     className="border-2 border-primary-500 text-primary-500 rounded-full px-11 py-1 font-semibold hover:bg-primary-500 hover:text-white"
@@ -231,19 +294,19 @@ const SignUp = () => {
                 className="item-center item"
               /> */}
               <h2 className="item-center item font-bold text-2xl text-white">
-                GreenTF
+                LAYOUTindex
               </h2>
               <div className="border-2 w-10 border-white inline-block mb-2"></div>
               <p className="mb-2 text-base">
-                <b>Caring for you</b> beyond borders
+                <b>Assesment</b>
               </p>
               <br />
               <p className="mb-2">Already have an account?</p>
               <Link
-                href={`/auth/users/LogIn`}
+                href={`/`}
                 className="border-2 border-white rounded-full px-11 py-1 font-semibold hover:bg-white hover:text-primary-500"
               >
-                Sign in
+                Sign In
               </Link>
             </div>
           </div>

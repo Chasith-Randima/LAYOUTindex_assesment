@@ -225,6 +225,19 @@ const CreateDevice = () => {
     }
     if (!values.type || values.type.length <= 0) {
       setError(true);
+      return;
+    }
+    if (!values.status || values.status.length <= 0) {
+      setError(true);
+      return;
+    }
+    if (!values.location || values.location.length <= 0) {
+      setError(true);
+      return;
+    }
+    if (!values.images || values.images.length <= 0) {
+      setError(true);
+      return;
     }
     // -----------------------------------
     setAlert({ ...alert, loading: true });
@@ -256,6 +269,7 @@ const CreateDevice = () => {
             status: "",
             images: "",
           });
+          setError(false);
           setAlert({
             ...alert,
             loading: false,
@@ -340,7 +354,7 @@ const CreateDevice = () => {
         )} */}
         <form>
           <div className="grid grid-cols-3 mt-1 mb-1">
-            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200  font-bold text-xl">
+            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200  font-bold text-xl text-gray-600">
               Serial Number
             </label>
             {/* {console.log(formValidation)} */}
@@ -349,7 +363,7 @@ const CreateDevice = () => {
                 // formValidation.serialNumberForm
                 //   ? "col-span-2 p-2 rounded-lg ml-2 bg-red-200 font-bold text-lg border-red-500 border-4"
                 // :
-                "col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+                "col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg outline-none text-gray-600"
               }
               type="text"
               value={serialNumber}
@@ -363,7 +377,7 @@ const CreateDevice = () => {
             )}
           </div>
           <div className="grid grid-cols-3 mt-1 mb-1">
-            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl">
+            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl text-gray-600">
               type
             </label>
             <select
@@ -376,7 +390,7 @@ const CreateDevice = () => {
                 //   formValidation.typeForm
                 // ? "col-span-2 p-2 rounded-lg ml-2 bg-red-200 font-bold text-lg border-red-500 border-4"
                 // :
-                "col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+                "col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg text-gray-600"
               }
               placeholder="Select Type"
             >
@@ -385,6 +399,11 @@ const CreateDevice = () => {
               <option value={"kisok"}>Kisok</option>
               <option value={"signage"}>Signage</option>
             </select>
+            {error && !type && (
+              <div className="flex justify-center col-span-3 border-red-500 border-2 rounded-lg mt-1 mb-1">
+                <h2 className="text-red-500 ">Please select a Type</h2>
+              </div>
+            )}
             {/* <input
               className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
               type="text"
@@ -394,7 +413,7 @@ const CreateDevice = () => {
             /> */}
           </div>
           <div className="grid grid-cols-3 mt-1 mb-1">
-            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl">
+            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl text-gray-600">
               status
             </label>
             <select
@@ -408,7 +427,7 @@ const CreateDevice = () => {
                 // formValidation.statusForm
                 //   ? "col-span-2 p-2 rounded-lg ml-2 bg-red-200 font-bold text-lg border-red-500 border-4"
                 // :
-                "col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+                "col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg text-gray-600"
               }
               placeholder="Select Status"
             >
@@ -416,6 +435,11 @@ const CreateDevice = () => {
               <option value={"active"}>Active</option>
               <option value={"inactive"}>Inactive</option>
             </select>
+            {error && !status && (
+              <div className="flex justify-center col-span-3 border-red-500 border-2 rounded-lg mt-1 mb-1">
+                <h2 className="text-red-500 ">Please select Status</h2>
+              </div>
+            )}
             {/* <input
               className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
               type="text"
@@ -425,7 +449,7 @@ const CreateDevice = () => {
             /> */}
           </div>
           <div className="grid grid-cols-3 mt-1 mb-1">
-            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl">
+            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl text-gray-600">
               Location
             </label>
             <select
@@ -438,7 +462,7 @@ const CreateDevice = () => {
                 // formValidation.locationForm
                 //   ? "col-span-2 p-2 rounded-lg ml-2 bg-red-200 font-bold text-lg border-red-500 border-4"
                 // :
-                "col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+                "col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg text-gray-600"
               }
               placeholder="Select a Location"
             >
@@ -456,6 +480,11 @@ const CreateDevice = () => {
                   );
                 })}
             </select>
+            {error && !location && (
+              <div className="flex justify-center col-span-3 border-red-500 border-2 rounded-lg mt-1 mb-1">
+                <h2 className="text-red-500 ">Please select location</h2>
+              </div>
+            )}
             {/* <input
               className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
               type="text"
@@ -465,7 +494,7 @@ const CreateDevice = () => {
             /> */}
           </div>
           <div className="grid grid-cols-3 mt-1 mb-1">
-            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl">
+            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl text-gray-600">
               Image
             </label>
             <input
@@ -474,17 +503,22 @@ const CreateDevice = () => {
                 // formValidation.imagesFomr
                 //   ? "col-span-2 p-2 rounded-lg ml-2 bg-red-200 font-bold text-lg border-red-500 border-4"
                 // :
-                "col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+                "col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg text-gray-600"
               }
               type="file"
               placeholder="SelectImage"
               //   value={images}
               onChange={handleChange("images")}
             />
+            {error && !images && (
+              <div className="flex justify-center col-span-3 border-red-500 border-2 rounded-lg mt-1 mb-1">
+                <h2 className="text-red-500 ">Please select Image</h2>
+              </div>
+            )}
           </div>
           <div className="flex justify-center mt-3">
             <button
-              className="p-3 font-bold text-xl bg-blue-300 rounded-lg hover:bg-blue-500"
+              className="p-3 font-bold text-xl text-white bg-blue-300 rounded-lg hover:bg-blue-500"
               onClick={handleSubmit}
             >
               Create Device

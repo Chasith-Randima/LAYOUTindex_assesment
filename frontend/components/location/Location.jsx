@@ -52,7 +52,7 @@ const Location = ({ location }) => {
         <Link
           href={`/locations/single/${location._id}`}
           // className="col-span-3 md:col-span-3"
-          className="underline text-2sm font-bold capitalize"
+          className="underline text-2sm font-bold capitalize text-gray-800"
         >
           {/* <Link href={`/user/one/${location._id}`} className="col-span-2"> */}
           {location.locationName}

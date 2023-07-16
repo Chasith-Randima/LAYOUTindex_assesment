@@ -3,12 +3,13 @@ import Layout from "components/Layout";
 
 import { getCookie } from "actions/auth";
 
-import { allLocations } from "actions/location";
+import { allDevices } from "actions/device";
 
 import Message from "components/Message";
 import Location from "components/location/Location";
+import Device from "components/device/Device";
 
-const AllLocations = () => {
+const AllDevices = () => {
   // const Index = ({ data, token, cookie }) => {
   //   console.log(token, cookie);
   const [allData, setAllData] = useState();
@@ -116,7 +117,7 @@ const AllLocations = () => {
     let token = getCookie("token_user");
 
     // console.log(params, "submit clicked...");
-    await allLocations(params)
+    await allDevices(params)
       .then((data) => {
         console.log(data);
         if (data.status && data.status == "success") {
@@ -204,16 +205,16 @@ const AllLocations = () => {
         </div>
 
         <h2 className="text-gray-600 text-2xl mt-2 font-semibold ">
-          All Locations
+          All Devices
         </h2>
         <div className="mt-2 mr-4 md:mr-10 border-2 border-gray-200 rounded-xl">
           <div className="grid   grid-cols-10 md:grid-cols-6 bg-primary-400 p-4 rounded-xl text-white text-xl font-sb ">
-            <h2 className="hidden md:block">Id</h2>
-            <h2>Name</h2>
+            <h2 className="hidden md:block">Image</h2>
+            <h2>Serial Number</h2>
             {/* <h2 className="hidden md:block">Email</h2>
             <h2>Role</h2> */}
-            <h2>Address</h2>
-            <h2>Phone</h2>
+            <h2>Status</h2>
+            <h2>Type</h2>
             <h2 className="text-center col-span-2 md:col-span-1 mr-2 md:mr-0">
               Update
             </h2>
@@ -224,8 +225,9 @@ const AllLocations = () => {
           <div className="">
             {console.log(allData)}
             {allData &&
-              allData.locations.map((location) => {
-                return <Location location={location} />;
+              allData.devices.map((device) => {
+                // return <Location location={location} />;
+                return <Device device={device} all={true} />;
                 // <Patients patient={patient} />
               })}
           </div>
@@ -279,4 +281,4 @@ const AllLocations = () => {
   );
 };
 
-export default AllLocations;
+export default AllDevices;

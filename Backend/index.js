@@ -10,6 +10,7 @@ const app = require("./app");
 mongoose.set("strictQuery", false);
 
 mongoose
+  // .connect(process.env.DATABASE_LOCAL, {
   .connect(process.env.DATABASE, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

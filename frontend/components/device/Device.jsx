@@ -6,7 +6,7 @@ import { getCookie } from "actions/auth";
 import { deleteDevice, updateDevice } from "actions/device";
 // import { deletelocation } from "actions/location";
 
-const Device = ({ device }) => {
+const Device = ({ device, all }) => {
   console.log(device.length, "from device.......................");
   const router = useRouter();
   const handleDelete = async (id) => {
@@ -83,7 +83,13 @@ const Device = ({ device }) => {
       {device.length == 0 ? (
         <h2>This location have no devices</h2>
       ) : (
-        <div className="grid grid-cols-5 gap-2 md:grid-cols-7 p-4 border-b-2 border-gray-200 hover:bg-gray-300 transition-all rounded-xl align-middle">
+        <div
+          className={
+            all
+              ? `grid grid-cols-5 gap-2 md:grid-cols-6 p-4 border-b-2 border-gray-200 hover:bg-gray-300 transition-all rounded-xl align-middle`
+              : `grid grid-cols-5 gap-2 md:grid-cols-7 p-4 border-b-2 border-gray-200 hover:bg-gray-300 transition-all rounded-xl align-middle`
+          }
+        >
           {/* <h3 className="hidden md:block col-span-1">
             {device._id.substr(device._id.length / 2, device._id.length)}
           </h3> */}
@@ -108,7 +114,7 @@ const Device = ({ device }) => {
           <Link
             href={`/devices/single/${device._id}`}
             // className="col-span-3 md:col-span-3"
-            className="underline text-2sm font-bold capitalize"
+            className="underline text-2sm font-bold capitalize text-gray-700"
           >
             {/* <Link href={`/user/one/${device._id}`} className="col-span-2"> */}
             {device.serialNumber}
@@ -123,12 +129,14 @@ const Device = ({ device }) => {
 
           {/* <Link href={`/devices/update/${device._id}`}> */}
           {/* <Link href={`/user/one/${device._id}`} className="col-span-2"> */}
-          <h2
-            className="p-1 bg-green-400 text-white hover:bg-green-600 transition-all rounded-xl text-center cursor-pointer h-8"
-            onClick={() => handleRemove(device._id)}
-          >
-            remove
-          </h2>
+          {all == false && (
+            <h2
+              className="p-1 bg-green-400 text-white hover:bg-green-600 transition-all rounded-xl text-center cursor-pointer h-8"
+              onClick={() => handleRemove(device._id)}
+            >
+              remove
+            </h2>
+          )}
           {/* </Link> */}
 
           <Link href={`/devices/update/${device._id}`}>

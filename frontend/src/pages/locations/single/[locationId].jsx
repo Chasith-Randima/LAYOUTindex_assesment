@@ -79,31 +79,31 @@ const SingleLocation = () => {
     <>
       <Layout>
         <div className="mt-2 mr-2">
-          <h2 className="text-gray-400 text-2xl mt-2 mb-2 font-semibold ">
+          <h2 className="text-gray-600 text-2xl mt-2 mb-2 font-semibold ">
             {allData && allData.location.locationName}
           </h2>
           <div className="pr-2">
             <div className="grid grid-cols-3 gap-4 mt-1 mb-1">
-              <h2 className="col-span-1 bg-gray-200 p-3 rounded-lg font-bold text-white text-xl">
+              <h2 className="col-span-1 bg-gray-200 p-3 rounded-lg font-bold text-gray-600 text-xl">
                 Address
               </h2>
-              <p className="col-span-2 bg-gray-200 p-3 rounded-lg font-bold text-white text-xl">
+              <p className="col-span-2 bg-gray-200 p-3 rounded-lg font-bold text-gray-600 text-xl">
                 {allData && allData.location.address}
               </p>
             </div>
             <div className="grid grid-cols-3 gap-4 mt-1 mb-1">
-              <h2 className="col-span-1 bg-gray-200 p-3 rounded-lg font-bold text-white text-xl">
+              <h2 className="col-span-1 bg-gray-200 p-3 rounded-lg font-bold text-gray-600 text-xl">
                 Phone NUmber
               </h2>
-              <p className="col-span-2 bg-gray-200 p-3 rounded-lg font-bold text-white text-xl">
+              <p className="col-span-2 bg-gray-200 p-3 rounded-lg font-bold text-gray-600 text-xl">
                 {allData && allData.location.phone}
               </p>
             </div>
             <div className="grid grid-cols-3 gap-4 mt-1 mb-1">
-              <h2 className="col-span-1 bg-gray-200 p-3 rounded-lg font-bold text-white text-xl">
+              <h2 className="col-span-1 bg-gray-200 p-3 rounded-lg font-bold text-gray-600 text-xl">
                 Assigned Device Count
               </h2>
-              <p className="col-span-2 bg-gray-200 p-3 rounded-lg font-bold text-white text-xl">
+              <p className="col-span-2 bg-gray-200 p-3 rounded-lg font-bold text-gray-600 text-xl">
                 {allData && allData.devices.length}
               </p>
             </div>
@@ -111,7 +111,7 @@ const SingleLocation = () => {
           {allData && allData.location && (
             <div className="flex justify-center mt-3">
               <button
-                className="p-3 font-bold text-xl bg-blue-300 rounded-lg hover:bg-blue-500"
+                className="p-3 font-bold text-xl text-white bg-blue-300 rounded-lg hover:bg-blue-500"
                 href={`/devices/fromLocation/${allData.location._id}`}
                 onClick={() => {
                   router.push({
@@ -123,12 +123,12 @@ const SingleLocation = () => {
                   });
                 }}
               >
-                Create Device
+                Create Device For This Location
               </button>
             </div>
           )}
           <div>
-            <h2 className="text-gray-400 text-2xl mt-2 mb-2 font-semibold ">
+            <h2 className="text-gray-600 text-2xl mt-2 mb-2 font-semibold ">
               Devices List
             </h2>
 

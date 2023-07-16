@@ -76,7 +76,7 @@ const SingleDevice = () => {
     <>
       <Layout>
         <div className=" mr-2">
-          <h2 className="text-gray-400 text-2xl mt-2 mb-2 font-semibold ">
+          <h2 className="text-gray-600 text-2xl mt-2 mb-2 font-semibold ">
             {allData && allData.device.serialNumber}
           </h2>
           <div className="grid grid-cols-4">
@@ -89,26 +89,26 @@ const SingleDevice = () => {
 
             <div className="col-span-2 ml-2 mr-2">
               <div className="grid grid-cols-3 gap-4 mt-1 mb-1">
-                <h2 className="col-span-1 bg-gray-200 p-3 rounded-lg font-bold text-white text-xl">
+                <h2 className="col-span-1 bg-gray-200 p-3 rounded-lg font-bold text-gray-600 text-xl">
                   Serial Number
                 </h2>
-                <p className="col-span-2 bg-gray-200 p-3 rounded-lg font-bold text-white text-xl">
+                <p className="col-span-2 bg-gray-200 p-3 rounded-lg font-bold text-gray-600 text-xl">
                   {allData && allData.device.serialNumber}
                 </p>
               </div>
               <div className="grid grid-cols-3 gap-4 mt-1 mb-1">
-                <h2 className="col-span-1 bg-gray-200 p-3 rounded-lg font-bold text-white text-xl">
+                <h2 className="col-span-1 bg-gray-200 p-3 rounded-lg font-bold text-gray-600 text-xl">
                   Status
                 </h2>
-                <p className="col-span-2 bg-gray-200 p-3 rounded-lg font-bold text-white text-xl">
+                <p className="col-span-2 bg-gray-200 p-3 rounded-lg font-bold text-gray-600 text-xl">
                   {allData && allData.device.status}
                 </p>
               </div>
               <div className="grid grid-cols-3 gap-4 mt-1 mb-1">
-                <h2 className="col-span-1 bg-gray-200 p-3 rounded-lg font-bold text-white text-xl">
+                <h2 className="col-span-1 bg-gray-200 p-3 rounded-lg font-bold text-gray-600 text-xl">
                   Type
                 </h2>
-                <p className="col-span-2 bg-gray-200 p-3 rounded-lg font-bold text-white text-xl">
+                <p className="col-span-2 bg-gray-200 p-3 rounded-lg font-bold text-gray-600 text-xl">
                   {allData && allData.device.type}
                 </p>
               </div>

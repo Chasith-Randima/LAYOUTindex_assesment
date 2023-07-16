@@ -44,7 +44,8 @@ const Sidebar = ({ showSideBar }) => {
   const userSidebar = () => {
     return (
       <div className="md:mr-10 ">
-        <SidebarLink link={"/main"} title={"Locations"} />
+        <SidebarLink link={"/main"} title={"All Locations"} />
+        <SidebarLink link={"/devices/allDevices"} title={"All Devices"} />
         <SidebarLink
           link={"/locations/createLocation"}
           title={"Create Location"}
