@@ -110,7 +110,7 @@ const SingleLocation = () => {
           {allData && allData.location && (
             <div className="flex justify-center mt-3">
               <button
-                className="p-3 font-bold text-xl text-white bg-blue-300 rounded-lg hover:bg-blue-500"
+                className="p-3 font-bold text-xl text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-all"
                 href={`/devices/fromLocation/${allData.location._id}`}
                 onClick={() => {
                   router.push({

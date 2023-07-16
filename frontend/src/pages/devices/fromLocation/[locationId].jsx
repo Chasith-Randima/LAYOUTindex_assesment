@@ -210,16 +210,16 @@ const CreateDevice = () => {
         />
       )}
       <div className="m-5">
-        <h2 className="text-gray-400 text-2xl mt-2 mb-2 font-semibold ">
+        <h2 className="text-gray-600 text-2xl mt-2 mb-2 font-semibold ">
           Create Device
         </h2>
         <form>
           <div className="grid grid-cols-3 mt-1 mb-1">
-            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl">
+            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl text-gray-600">
               Serial Number
             </label>
             <input
-              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg text-gray-600 outline-none"
               type="text"
               value={serialNumber}
               onChange={handleChange("serialNumber")}
@@ -232,14 +232,14 @@ const CreateDevice = () => {
             )}
           </div>
           <div className="grid grid-cols-3 mt-1 mb-1">
-            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl">
+            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl text-gray-600">
               type
             </label>
             <select
               type="text"
               value={type}
               onChange={handleChange("type")}
-              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg text-gray-600 outline-none"
               placeholder="Select Type"
             >
               <option value={"none"}>Select Type</option>
@@ -254,14 +254,14 @@ const CreateDevice = () => {
             )}
           </div>
           <div className="grid grid-cols-3 mt-1 mb-1">
-            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl">
+            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl text-gray-600">
               status
             </label>
             <select
               type="text"
               value={status}
               onChange={handleChange("status")}
-              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg text-gray-600 outline-none"
               placeholder="Select Status"
             >
               <option value={"none"}>Select Status</option>
@@ -275,23 +275,23 @@ const CreateDevice = () => {
             )}
           </div>
           <div className="grid grid-cols-3 mt-1 mb-1">
-            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl">
+            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl text-gray-600">
               Location
             </label>
 
             <h2
-              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg text-gray-600"
               type="text"
             >
               {locationName}
             </h2>
           </div>
           <div className="grid grid-cols-3 mt-1 mb-1">
-            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl">
+            <label className="col-span-1 p-2 rounded-lg mr-2 bg-gray-200 font-bold text-xl text-gray-600">
               Image
             </label>
             <input
-              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg"
+              className="col-span-2 p-2 rounded-lg ml-2 bg-gray-200 font-bold text-lg text-gray-600 outline-none"
               type="file"
               placeholder="SelectImage"
               //   value={images}
@@ -305,7 +305,7 @@ const CreateDevice = () => {
           </div>
           <div className="flex justify-center mt-3">
             <button
-              className="p-3 font-bold text-xl bg-blue-300 rounded-lg hover:bg-blue-500"
+              className="p-3 font-bold text-xl text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-all"
               onClick={handleSubmit}
             >
               Create Device

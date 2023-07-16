@@ -172,7 +172,7 @@ const CreateLocation = () => {
           </div>
           <div className="flex justify-center mt-3">
             <button
-              className="p-3 font-bold text-xl text-white bg-blue-300 rounded-lg hover:bg-blue-500"
+              className="p-3 font-bold text-xl text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-all"
               onClick={handleSubmit}
             >
               Create Location
