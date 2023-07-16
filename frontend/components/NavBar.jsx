@@ -53,20 +53,21 @@ const Navbar = ({ setSideBar, showSideBar }) => {
               <div className="cursor-pointer hidden md:block mx-3 p-3 text-primary-500 font-semibold rounded bg-white hover:bg-primary-500 hover:text-white transition-all capitalize">
                 {user.name.split(" ")[0]}{" "}
               </div>
-              <div className=" hidden md:block mx-3 p-3 text-primary-500 font-semibold rounded bg-white hover:bg-primary-500 hover:text-white transition-all">
-                <h2
-                  onClick={() => handleLogout(logOut)}
-                  className="cursor-pointer"
-                >
-                  LogOut
-                </h2>
+              <div
+                className=" hidden md:block mx-3 p-3 text-primary-500 font-semibold rounded bg-white hover:bg-primary-500 hover:text-white transition-all cursor-pointer"
+                onClick={() => handleLogout(logOut)}
+              >
+                <h2>LogOut</h2>
               </div>
             </>
           )}
           {!user._id && (
-            <div className="cursor-pointer hidden md:block mx-3 p-3 text-primary-500 font-semibold rounded bg-white hover:bg-primary-500 hover:text-white transition-all">
-              <Link href="/">LogIn</Link>
-            </div>
+            <Link
+              className="cursor-pointer hidden md:block mx-3 p-3 text-primary-500 font-semibold rounded bg-white hover:bg-primary-500 hover:text-white transition-all"
+              href={"/"}
+            >
+              LogIn
+            </Link>
           )}
           <div className="md:hidden" onClick={() => setSideBar(!showSideBar)}>
             <FaBars className="font-bold text-4xl cursor-pointer" />
