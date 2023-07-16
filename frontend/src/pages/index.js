@@ -87,7 +87,7 @@ const LogIn = () => {
           setAlert({
             ...alert,
             loading: false,
-            message: data.message,
+            message: "Check Your credentials...",
             error: true,
             success: false,
           });
@@ -98,7 +98,7 @@ const LogIn = () => {
         setAlert({
           ...alert,
           loading: false,
-          message: data.message,
+          message: "check your credentials...",
           error: true,
           success: false,
         });
@@ -196,6 +196,13 @@ const LogIn = () => {
                       <h2 className="text-red-500 ">Please Enter a Password</h2>
                     </div>
                   )}
+                  {tempError && password?.length < 8 && (
+                    <div className="flex justify-center col-span-3 border-red-500 border-2 rounded-lg mt-1 mb-1">
+                      <h2 className="text-red-500 ">
+                        Please must at least contain 8 charactors
+                      </h2>
+                    </div>
+                  )}
 
                   <button
                     onClick={handleSubmit}
@@ -216,7 +223,7 @@ const LogIn = () => {
                 <b>Assesment</b>
               </p>
               <br />
-              <p className="mb-2">Don't have an account?</p>
+              <p className="mb-2 text-white">Don't have an account?</p>
               <Link
                 href={`/auth/SignUp`}
                 className="border-2 border-blue text-white rounded-full px-11 py-1 font-semibold hover:bg-blue hover:text-white hover:bg-blue-400"
