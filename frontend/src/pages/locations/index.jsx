@@ -31,7 +31,7 @@ const AllLocations = () => {
     setFilters({ ...filters, [name]: e.target.value });
   };
 
-  // ---------------pagination-------------------------
+  // ---------------pagination------------------------
   const nextPage = () => {
     setPage((oldPage) => {
       let nextPage = oldPage + 1;
